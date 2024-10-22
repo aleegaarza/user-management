@@ -1,63 +1,71 @@
-"use client"
-import React, { useState } from 'react'; 
-import { createUserWithEmailAndPassword, getAuth, auth } from 'firebase/auth';
-
+"use client";
+import React, { useState } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/firebase/firebase";
 
 const RegisterPage = () => {
-  const [email, setEmail] = useState(''); // State for email
-  const [password, setPassword] = useState(''); // State for password
-  const [confirmPassword, setConfirmPassword] = useState(''); // State for confirm password
+  const [name, setName] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-  // Handle form submission
-  const handleRegister = (event) => {
-    event.preventDefault();
-
+  const handleRegister = async (e) => {
+    e.preventDefault();
     if (password !== confirmPassword) {
-      alert('Passwords do not match!');
+      alert("passwords do not match");
       return;
     }
-
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in 
-        const user = userCredential.user;
-        console.log('User registered:', user);
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.error('Error registering:', errorCode, errorMessage);
-      });
+    try {
+      await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password,
+        name,
+        lastname
+      );
+      const user = auth.currentUser;
+      console.log(user);
+      console.log("user registered successfully");
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (
     <div>
       <h2>Register Page</h2>
       <form onSubmit={handleRegister}>
-        <input 
-          type='text' 
-          placeholder='Name'
-          onChange={(e) => setEmail(e.target.value)} 
+        <h3>Sign up</h3>
+        <input
+          type="text"
+          placeholder="Name"
+          onChange={(e) => setName(e.target.value)}
         />
-        <input 
-          type='email' 
-          placeholder='Email'
-          onChange={(e) => setEmail(e.target.value)} 
+        <input
+          type="text"
+          placeholder="Last name"
+          onChange={(e) => setLastname(e.target.value)}
         />
-        <input 
-          type='password' 
-          placeholder='Password'
-          onChange={(e) => setPassword(e.target.value)} 
+        <input
+          type="email"
+          placeholder="Email"
+          onChange={(e) => setEmail(e.target.value)}
         />
-        <input 
-          type='password' // Use correct input type
-          placeholder='Confirm Password'
-          onChange={(e) => setConfirmPassword(e.target.value)} 
+        <input
+          type="password"
+          placeholder="Password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Confirm Password"
+          onChange={(e) => setConfirmPassword(e.target.value)}
         />
         <button type="submit">Sign up</button>
       </form>
     </div>
   );
-}
+};
 
 export default RegisterPage;
