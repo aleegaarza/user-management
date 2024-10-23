@@ -35,36 +35,65 @@ const RegisterPage = () => {
   };
 
   return (
-    <div>
-      <h2>Register Page</h2>
-      <form onSubmit={handleRegister}>
-        <h3>Sign up</h3>
-        <input
-          type="text"
-          placeholder="Name"
-          onChange={(e) => setName(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Last name"
-          onChange={(e) => setLastname(e.target.value)}
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Confirm Password"
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
-        <button type="submit">Sign up</button>
+    <div className="flex justify-center mt-3">
+      <form className="shadow-lg p-6" onSubmit={handleRegister}>
+        <h3 className="text-3xl font-bold mb-3 flex justify-center">Sign up</h3>
+        <div className="mb-3 flex flex-col">
+          <label className="form-label">First name</label>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Name"
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+        </div>
+        <div className="mb-3 flex flex-col">
+          <label className="form-label">Last name</label>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Last name"
+            onChange={(e) => setLastname(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="mb-3 flex flex-col">
+          <label className="form-label">Email</label>
+          <input
+            type="email"
+            className="form-control"
+            placeholder="Email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div className="mb-3 flex flex-col">
+          <label htmlFor="">Password</label>
+          <input
+            type="password"
+            className="form-control"
+            placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <div className="mb-3 flex flex-col">
+          <label htmlFor="">Confirm password</label>
+          <input
+            type="password"
+            className="form-control"
+            placeholder="Confirm Password"
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+        </div>
+        <div className="mb-3 flex flex-col">
+          <button
+            className="rounded-full bg-sky-500 hover:bg-sky-400"
+            type="submit"
+          >
+            Sign up
+          </button>
+        </div>
       </form>
     </div>
   );
