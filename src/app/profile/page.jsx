@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 import { auth, fireStore } from "@/firebase/firebase";
 import { doc, getDoc } from "firebase/firestore";
@@ -21,17 +21,33 @@ const ProfilePage = () => {
   useEffect(() => {
     fetchData();
   }, []);
+  const handleLogOut = async () => {
+    try {
+      await auth.signOut();
+      window.location.href = "/";
+      console.log("user logged out");
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   return (
     <>
-        {userDetails ? 
+      {userDetails ? (
         <header>
-        <h1>Hello {userDetails.firstname}</h1>
-        <p>{userDetails.firstname}</p>
-        <p>{userDetails.lastname}</p>
-        <p>{userDetails.email}</p>
+          <h1>Hello {userDetails.firstname}</h1>
+          <p>{userDetails.firstname}</p>
+          <p>{userDetails.lastname}</p>
+          <p>{userDetails.email}</p>
+          <button
+            className="rounded-full bg-sky-500 hover:bg-sky-400"
+            onClick={handleLogOut}
+          >
+            Log out
+          </button>
         </header>
-        : "...Loading"}
-      
+      ) : (
+        "...Loading"
+      )}
     </>
   );
 };
