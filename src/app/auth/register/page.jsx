@@ -1,7 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@/firebase/firebase";
+import { auth, fireStore } from "@/firebase/firebase";
+import { doc, setDoc } from "firebase/firestore";
 
 const RegisterPage = () => {
   const [name, setName] = useState("");
@@ -17,15 +18,16 @@ const RegisterPage = () => {
       return;
     }
     try {
-      await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password,
-        name,
-        lastname
-      );
+      await createUserWithEmailAndPassword(auth, email, password);
       const user = auth.currentUser;
       console.log(user);
+      if (user) {
+        await setDoc(doc(fireStore, "Users", user.uid), {
+          email: user.email,
+          firstname: name,
+          lastname: lastname,
+        });
+      }
       console.log("user registered successfully");
     } catch (error) {
       console.log(error.message);
