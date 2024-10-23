@@ -1,12 +1,24 @@
 "use client";
+import { auth } from "@/firebase/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      console.log("logged in successfully");
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   return (
     <div className="flex justify-center mt-3">
-      <form className="shadow-lg p-6">
+      <form className="shadow-lg p-6" onSubmit={handleSubmit}>
         <h3 className="text-3xl font-bold mb-3 flex justify-center">Sign in</h3>
         <div className="mb-3 flex flex-col">
           <label className="form-label">Email</label>
