@@ -12,6 +12,7 @@ const LoginPage = () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       console.log("logged in successfully");
+      window.location.href="/profile"
     } catch (error) {
       console.log(error.message);
     }
@@ -46,6 +47,7 @@ const LoginPage = () => {
             Sign in
           </button>
         </div>
+        <p>Don´t have an account?<br/><a className="text-sky-400" href="/auth/register">Register here</a></p>
       </form>
     </div>
   );

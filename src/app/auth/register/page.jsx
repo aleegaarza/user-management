@@ -94,6 +94,7 @@ const RegisterPage = () => {
             Sign up
           </button>
         </div>
+        <p><a className="text-sky-400" href="/">Sign in here</a></p>
       </form>
     </div>
   );
