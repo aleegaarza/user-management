@@ -2,6 +2,7 @@
 import { auth } from "@/firebase/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -12,9 +13,11 @@ const LoginPage = () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       console.log("logged in successfully");
+      toast.success("you are logged in 😃")
       window.location.href="/profile"
     } catch (error) {
       console.log(error.message);
+      toast.error("incorrect email or password")
     }
   };
   return (

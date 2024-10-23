@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, fireStore } from "@/firebase/firebase";
 import { doc, setDoc } from "firebase/firestore";
+import 'react-toastify/dist/ReactToastify.css'
+import { toast, ToastContainer } from "react-toastify";
 
 const RegisterPage = () => {
   const [name, setName] = useState("");
@@ -29,8 +31,11 @@ const RegisterPage = () => {
         });
       }
       console.log("user registered successfully");
+      toast.success("user registered successfully!")
+      window.location.href="/"
     } catch (error) {
       console.log(error.message);
+      toast.error("password should be at least 6 characters")
     }
   };
 
@@ -96,6 +101,7 @@ const RegisterPage = () => {
         </div>
         <p><a className="text-sky-400" href="/">Sign in here</a></p>
       </form>
+      <ToastContainer/>
     </div>
   );
 };
