@@ -2,7 +2,8 @@
 import React, { useEffect, useState } from "react";
 import { auth, fireStore } from "@/firebase/firebase";
 import { doc, getDoc } from "firebase/firestore";
-import CreateFormsPage from "../forms/page";
+import CreateFormsPage from "../pages/formCreator/page";
+import FormsList from "../pages/formsList/page";
 
 const ProfilePage = () => {
   const [userDetails, setUserDetails] = useState(null);
@@ -49,6 +50,9 @@ const ProfilePage = () => {
           </header>
           <div>
             <CreateFormsPage />
+          </div>
+          <div>
+            <FormsList />
           </div>
         </>
       ) : (
