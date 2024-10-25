@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { auth, fireStore } from "@/firebase/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import CreateFormsPage from "../pages/formCreator/page";
-import FormsList from "../pages/formsList/page";
+import FormsListPage from "../pages/viewForms/page";
 
 const ProfilePage = () => {
   const [userDetails, setUserDetails] = useState(null);
@@ -36,23 +36,27 @@ const ProfilePage = () => {
     <>
       {userDetails ? (
         <>
-          <header>
-            <h1>Hello {userDetails.firstname}</h1>
-            <p>{userDetails.firstname}</p>
-            <p>{userDetails.lastname}</p>
-            <p>{userDetails.email}</p>
-            <button
-              className="rounded-full bg-sky-500 hover:bg-sky-400"
-              onClick={handleLogOut}
-            >
-              Log out
-            </button>
+          <header className="header">
+            <div>
+              <h1>Hello</h1>
+              <p>{userDetails.firstname}</p>
+              <p>{userDetails.lastname}</p>
+              <p>{userDetails.email}</p>
+            </div>
+            <div>
+              <button
+                className="button bg-sky-500 hover:bg-sky-400"
+                onClick={handleLogOut}
+              >
+                Log out
+              </button>
+            </div>
           </header>
           <div>
             <CreateFormsPage />
           </div>
           <div>
-            <FormsList />
+            <FormsListPage />
           </div>
         </>
       ) : (

@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    background-color:darkgrey;
+}
+.header {
+    justify-content: space-between;
+    display: flex;
+}
+  .button {
+    font-family: "IBM Plex Mono";
+    font-weight: bold;
+    font-size: 16px;
+    width: 100px;
+    height: 40px;
+    letter-spacing: 0;
+    text-align: center;
+    line-height: 22px;
+    margin: 10px;
+  }
