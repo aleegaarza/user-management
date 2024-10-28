@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { fireStore } from "@/firebase/firebase";
@@ -31,13 +31,18 @@ const FormsListPage = () => {
   };
 
   return (
-    <div>
-      <h1>Available Forms</h1>
-      <ul>
+    <div className="flex items-center flex-col">
+      <h1 className="text-4xl m-10 mt-20">Available Forms</h1>
+      <ul className="inline-grid grid-cols-3 gap-10 items-end">
         {forms.map((form) => (
-          <li key={form.id}>
+          <li className="flex items-center flex-col text-xl" key={form.id}>
             {form.title}{" "}
-            <button onClick={() => viewForm(form.id)}>View Form</button>
+            <button
+              className="w-40 bg-sky-500 hover:bg-sky-400 mt-10"
+              onClick={() => viewForm(form.id)}
+            >
+              View Form
+            </button>
           </li>
         ))}
       </ul>

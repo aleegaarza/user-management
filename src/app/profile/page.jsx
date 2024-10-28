@@ -4,9 +4,11 @@ import { auth, fireStore } from "@/firebase/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import CreateFormsPage from "../pages/formCreator/page";
 import FormsListPage from "../pages/viewForms/page";
+import Profile from "../icons/profile";
 
 const ProfilePage = () => {
   const [userDetails, setUserDetails] = useState(null);
+  const [open, setOpen] = useState(false);
   const fetchData = async () => {
     auth.onAuthStateChanged(async (user) => {
       console.log(user);
@@ -36,28 +38,36 @@ const ProfilePage = () => {
     <>
       {userDetails ? (
         <>
-          <header className="header">
+          <header className="flex justify-content-space-between m-5 text-2xl">
             <div>
-              <h1>Hello</h1>
+              <span className="font-bold text-4xl">Hello:</span>
               <p>{userDetails.firstname}</p>
               <p>{userDetails.lastname}</p>
               <p>{userDetails.email}</p>
             </div>
-            <div>
+
+            <div className="absolute top-10 right-5">
+              <button onClick={() => setOpen((open) => !open)}>
+                <Profile />
+              </button>
+            </div>
+            {open && (
               <button
-                className="button bg-sky-500 hover:bg-sky-400"
+                className="bg-sky-500 hover:bg-sky-400 text-lg w-20 h-8 absolute top-20 right-5"
                 onClick={handleLogOut}
               >
                 Log out
               </button>
-            </div>
+            )}
           </header>
           <div>
             <CreateFormsPage />
-          </div>
-          <div>
             <FormsListPage />
           </div>
+          <footer className="flex justify-between m-5 mt-40 text-sm">
+            <p>Alejandra Garza</p>
+            <p>Octubre 2024</p>
+          </footer>
         </>
       ) : (
         "...Loading"

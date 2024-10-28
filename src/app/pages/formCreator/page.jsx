@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import { auth, fireStore } from "@/firebase/firebase";
 import { addDoc, collection, documentId, getDoc } from "firebase/firestore";
@@ -28,10 +28,11 @@ const CreateFormsPage = () => {
     }
   };
   return (
-    <div>
-      <h1>Create Forms</h1>
+    <div className="flex items-center flex-col">
+      <h1 className="text-4xl mt-10">Create Forms</h1>
       <input
         type="text"
+        className="m-4"
         placeholder="Form Title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
@@ -41,6 +42,7 @@ const CreateFormsPage = () => {
           <input
             name="question"
             type="text"
+            className="mb-2"
             placeholder="Question"
             value={question.question}
             onChange={(e) => handleInputChange(index, e)}
@@ -56,8 +58,20 @@ const CreateFormsPage = () => {
           </select>
         </div>
       ))}
-      <button onClick={addQuestion}>Add Question</button>
-      <button onClick={saveForm}>Save Form</button>
+      <div className="mt-4">
+        <button
+          className="bg-sky-500 hover:bg-sky-400 mx-6 w-40"
+          onClick={addQuestion}
+        >
+          Add Question
+        </button>
+        <button
+          className="bg-sky-500 hover:bg-sky-400 mx-6 w-40"
+          onClick={saveForm}
+        >
+          Save Form
+        </button>
+      </div>
     </div>
   );
 };
