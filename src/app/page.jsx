@@ -15,7 +15,6 @@ function HomePage() {
   })
   return (
     <div>
-      <h2>Welcome</h2>
       {user ? <ProfilePage/> : <LoginPage/>}
       <ToastContainer/>
     </div>

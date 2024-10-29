@@ -2,10 +2,10 @@
 import React, { useEffect, useState } from "react";
 import { auth, fireStore } from "@/firebase/firebase";
 import { doc, getDoc } from "firebase/firestore";
-import CreateFormsPage from "../pages/formCreator/page";
 import FormsListPage from "../pages/viewForms/page";
 import Profile from "../icons/profile";
 import { useRouter } from "next/navigation";
+import 'react-toastify/dist/ReactToastify.css'
 
 const ProfilePage = () => {
   const [userDetails, setUserDetails] = useState(null);
@@ -65,8 +65,8 @@ const ProfilePage = () => {
               </button>
             )}
           </header>
-          <div>
-            <button onClick={createForm}> create forms page</button>
+          <div className="flex justify-center">
+            <button className="bg-sky-200 hover:bg-sky-100 text-2xl" onClick={createForm}> Click me to create your own form!</button>
           </div>
           <div>
             <FormsListPage />

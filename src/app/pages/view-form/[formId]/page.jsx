@@ -1,12 +1,16 @@
 "use client";
 import { fireStore } from "@/firebase/firebase";
 import { addDoc, collection, doc, getDoc } from "firebase/firestore";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css'
 
 const ViewFormPage = ({ params }) => {
   const { formId } = params;
   const [form, setForm] = useState(null);
   const [responses, setResponses] = useState([]);
+  const router = useRouter()
 
   useEffect(() => {
     const fetchForm = async () => {
@@ -19,7 +23,7 @@ const ViewFormPage = ({ params }) => {
           setResponses(formSnap.data().questions.map(() => ""));
           console.log("data", formSnap.data());
         } else {
-          console.log("Form not found!");
+          toast.error("Form not found!");
         }
       } catch (error) {
         console.error("Error fetching form:", error);
@@ -43,17 +47,21 @@ const ViewFormPage = ({ params }) => {
         formId: formId,
         responses: responses,
       });
-      alert("Responses submitted!");
+      toast.success("Responses submitted!");
     } catch (error) {
-      console.error("Error submitting responses:", error);
+      toast.error("Error submitting responses:", error);
     }
   };
   if (!form) return <p>Loading...</p>;
   return (
+    <>
+    
+    <button className="absolute top-10 right-5 font-bold" onClick={() => {router.push("/profile")}}>Go back</button>
     <div className="flex items-center flex-col w-100">
       {form ? (
         <>
-          <h1 className="text-4xl m-10">{form.title}</h1>
+          <h1 className="text-4xl m-20">{form.title}</h1>
+          {/* <h2>{form.}</h2> */}
           {form.questions.map((question, i) => (
             <div className="border-2 flex " key={i}>
               <label>{question.question}</label>
@@ -91,6 +99,8 @@ const ViewFormPage = ({ params }) => {
         <p>Form not found</p>
       )}
     </div>
+    <ToastContainer/>
+    </>
   );
 };
 

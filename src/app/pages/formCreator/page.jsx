@@ -2,10 +2,14 @@
 import React, { useState } from "react";
 import { auth, fireStore } from "@/firebase/firebase";
 import { addDoc, collection, documentId, getDoc } from "firebase/firestore";
+import { useRouter } from "next/navigation";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css'
 
 const CreateFormsPage = () => {
   const [title, setTitle] = useState("");
   const [questions, setQuestions] = useState([{ question: "", type: "text" }]);
+  const router = useRouter()
 
   const addQuestion = () => {
     setQuestions([...questions, { question: "", type: "text" }]);
@@ -22,14 +26,16 @@ const CreateFormsPage = () => {
         title,
         questions,
       });
-      alert("Form saved!");
+      toast.success("Form saved!");
     } catch (error) {
-      console.error("Error saving form:", error);
+      toast.error("Error saving form:", error);
     }
   };
   return (
+    <>
+    <button className="absolute top-10 right-5 font-bold" onClick={() => {router.push("/profile")}}>Go back</button>
     <div className="flex items-center flex-col">
-      <h1 className="text-4xl mt-10">Create Forms</h1>
+      <h1 className="text-4xl mt-20">Create Forms</h1>
       <input
         type="text"
         className="m-4"
@@ -72,7 +78,9 @@ const CreateFormsPage = () => {
           Save Form
         </button>
       </div>
+      <ToastContainer/>
     </div>
+    </>
   );
 };
 
