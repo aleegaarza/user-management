@@ -5,10 +5,12 @@ import { doc, getDoc } from "firebase/firestore";
 import CreateFormsPage from "../pages/formCreator/page";
 import FormsListPage from "../pages/viewForms/page";
 import Profile from "../icons/profile";
+import { useRouter } from "next/navigation";
 
 const ProfilePage = () => {
   const [userDetails, setUserDetails] = useState(null);
   const [open, setOpen] = useState(false);
+  const router = useRouter();
   const fetchData = async () => {
     auth.onAuthStateChanged(async (user) => {
       console.log(user);
@@ -21,6 +23,9 @@ const ProfilePage = () => {
         console.log("user is not logged in");
       }
     });
+  };
+  const createForm = () => {
+    router.push(`/pages/formCreator`);
   };
   useEffect(() => {
     fetchData();
@@ -61,7 +66,9 @@ const ProfilePage = () => {
             )}
           </header>
           <div>
-            <CreateFormsPage />
+            <button onClick={createForm}> create forms page</button>
+          </div>
+          <div>
             <FormsListPage />
           </div>
           <footer className="flex justify-between m-5 mt-40 text-sm">

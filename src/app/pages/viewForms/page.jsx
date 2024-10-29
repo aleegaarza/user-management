@@ -27,7 +27,7 @@ const FormsListPage = () => {
 
   // Redirect to view form page
   const viewForm = (formId) => {
-    router.push(`/view-form/${formId}`); // Redirecting to the form view page
+    router.push(`/pages/view-form/${formId}`);
   };
 
   return (
