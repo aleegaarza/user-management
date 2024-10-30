@@ -5,6 +5,7 @@ import { auth, fireStore } from "@/firebase/firebase";
 import { doc, setDoc } from "firebase/firestore";
 import 'react-toastify/dist/ReactToastify.css'
 import { toast, ToastContainer } from "react-toastify";
+import InputName from "./inputName";
 
 const RegisterPage = () => {
   const [name, setName] = useState("");
@@ -43,16 +44,7 @@ const RegisterPage = () => {
     <div className="flex justify-center mt-3">
       <form className="shadow-lg p-6" onSubmit={handleRegister}>
         <h3 className="text-3xl font-bold mb-3 flex justify-center">Sign up</h3>
-        <div className="mb-3 flex flex-col">
-          <label className="form-label">First name</label>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Name"
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </div>
+        <InputName setName={setName} />
         <div className="mb-3 flex flex-col">
           <label className="form-label">Last name</label>
           <input
